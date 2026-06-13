@@ -25,3 +25,5 @@ O projeto foi construído utilizando as melhores práticas de desenvolvimento we
 * **Estilização:** [Tailwind CSS](https://tailwindcss.com/) / Styled Components
 * **Alojamento & Deploy:** [Vercel](https://vercel.com)
 * **Ícones:** [Lucide React](https://lucide.dev/) / React Icons
+
+---
