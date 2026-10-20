@@ -1,67 +1,94 @@
 import BrandWordmark from './BrandWordmark'
+import { Heart, InstagramIcon, WhatsAppIcon } from './Doodles'
+import { type NavItem } from './SiteHeader'
 
 type SiteFooterProps = {
 	logo: string
+	navItems: NavItem[]
 	whatsappLink: string
+	instagramLink: string
 }
 
-function SiteFooter({ logo, whatsappLink }: SiteFooterProps) {
+function SiteFooter({ logo, navItems, whatsappLink, instagramLink }: SiteFooterProps) {
 	return (
-		<footer
-			id="contato"
-			className="bg-[#FFCAD4] px-5 py-12 text-[#785E61] sm:px-8 lg:px-10"
-		>
-			<div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-start">
-				<div>
-					<div className="flex items-center gap-4">
-						<img
-							src={logo}
-							alt="Logo Decorê Arts"
-							className="h-16 w-16 rounded-full bg-[#FAFAFA]/75 p-1 object-contain"
-						/>
-						<div>
-							<BrandWordmark className="text-[2.6rem] sm:text-5xl" />
-							<p className="max-w-2xl text-xs uppercase tracking-[0.24em] text-[#785E61]/72 sm:text-sm">
-								Artes personalizadas em madeira feitas com carinho.
-							</p>
-						</div>
+		<footer className="torn-top -mt-6 bg-ink px-5 pb-8 pt-16 text-cream sm:px-8 lg:px-10">
+			<div className="mx-auto grid max-w-[1440px] items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
+				<div className="flex items-center gap-4">
+					<img
+						src={logo}
+						alt="Logo Decorê Arts"
+						className="h-14 w-14 rounded-full bg-cream p-1 object-contain"
+					/>
+					<div>
+						<span className="relative inline-block">
+							<BrandWordmark className="text-[2.6rem]" />
+							<Heart className="absolute -right-4 top-1 h-3.5 w-3.5 text-blush" />
+						</span>
+						<p className="font-hand text-xl text-cream/70">
+							arte em madeira, feita à mão
+						</p>
 					</div>
 				</div>
 
-				<div className="grid gap-6 sm:grid-cols-2">
-					<a
-						href="https://www.instagram.com/decoreart.s/"
-						target="_blank"
-						rel="noreferrer"
-						className="cursor-pointer rounded-[1.6rem] border border-[#785E61]/10 bg-[#FAFAFA]/55 px-5 py-5 transition hover:bg-[#FAFAFA]/80"
-					>
-						<p className="text-xs uppercase tracking-[0.28em] text-[#785E61]/60">
-							Instagram
-						</p>
-						<p className="mt-2 text-sm font-semibold">@decoreart.s</p>
-					</a>
-					<a
-						href={whatsappLink}
-						target="_blank"
-						rel="noreferrer"
-						className="cursor-pointer rounded-[1.6rem] border border-[#785E61]/10 bg-[#FAFAFA]/55 px-5 py-5 transition hover:bg-[#FAFAFA]/80"
-					>
-						<p className="text-xs uppercase tracking-[0.28em] text-[#785E61]/60">
-							WhatsApp
-						</p>
-						<p className="mt-2 text-sm font-semibold">(35) 99983-8671</p>
-					</a>
+				<nav className="flex flex-wrap items-center gap-x-7 gap-y-3 text-sm font-bold lg:justify-center">
+					{navItems.map((item) =>
+						item.href ? (
+							<a
+								key={item.label}
+								href={item.href}
+								className="cursor-pointer text-cream/80 transition hover:text-blush"
+							>
+								{item.label}
+							</a>
+						) : (
+							<button
+								key={item.label}
+								type="button"
+								onClick={item.action}
+								className="cursor-pointer text-cream/80 transition hover:text-blush"
+							>
+								{item.label}
+							</button>
+						),
+					)}
+				</nav>
+
+				<div className="flex flex-col gap-4 lg:items-end">
+					<div className="flex items-center gap-3">
+						<a
+							href={instagramLink}
+							target="_blank"
+							rel="noreferrer"
+							aria-label="Instagram @decoreart.s"
+							className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-cream/20 transition hover:border-blush hover:text-blush"
+						>
+							<InstagramIcon className="h-5 w-5" />
+						</a>
+						<a
+							href={whatsappLink}
+							target="_blank"
+							rel="noreferrer"
+							aria-label="WhatsApp (35) 99983-8671"
+							className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-cream/20 transition hover:border-blush hover:text-blush"
+						>
+							<WhatsAppIcon className="h-5 w-5" />
+						</a>
+					</div>
+					<p className="text-sm text-cream/65">
+						@decoreart.s · (35) 99983-8671
+					</p>
 				</div>
 			</div>
 
-			<div className="mx-auto mt-10 max-w-7xl border-t border-[#785E61]/12 pt-6 text-center">
+			<div className="mx-auto mt-10 flex max-w-[1440px] flex-col items-center justify-between gap-3 border-t border-dashed border-cream/15 pt-6 text-sm text-cream/55 sm:flex-row">
+				<p>© {new Date().getFullYear()} Decorê Arts. Todos os direitos reservados.</p>
 				<a
 					href="https://www.instagram.com/rodrigoge_/"
 					target="_blank"
 					rel="noreferrer"
-					className="cursor-pointer text-sm font-medium text-[#785E61] transition hover:text-[#785E61]/70"
+					className="inline-flex cursor-pointer items-center gap-1.5 transition hover:text-blush"
 				>
-					Feito por Rodrigo Gouveia - @rodrigoge
+					Feito com <Heart className="h-3.5 w-3.5 text-blush" /> por Rodrigo Gouveia · @rodrigoge
 				</a>
 			</div>
 		</footer>

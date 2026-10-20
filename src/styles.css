@@ -1,25 +1,45 @@
-﻿@import url("https://fonts.cdnfonts.com/css/google-sans");
-@import url("https://fonts.googleapis.com/css2?family=Sacramento&display=swap");
+﻿@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&family=Sacramento&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-serif: "Fraunces", "Georgia", serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+  --font-sans: "Nunito", "Segoe UI", sans-serif;
+
+  --color-cream: #fbf6ee;
+  --color-paper: #f3e9da;
+  --color-ink: #3f2f31;
+  --color-mauve: #785e61;
+  --color-blush: #ffcad4;
+  --color-rose: #fbe4e7;
+  --color-sage: #dfe8d6;
+  --color-forest: #4b6b55;
+  --color-clay: #e2775c;
+  --color-honey: #f3c969;
+}
 
 :root {
   color-scheme: light;
-  font-family: "Google Sans", "Product Sans", "Segoe UI", sans-serif;
-  background: #fafafa;
-  color: #785e61;
+  font-family: var(--font-sans);
+  background: var(--color-cream);
+  color: var(--color-mauve);
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    radial-gradient(circle at top left, rgba(255, 202, 212, 0.18), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(120, 94, 97, 0.08), transparent 26%),
-    #fafafa;
+  background-color: var(--color-cream);
+  /* textura sutil de papel */
+  background-image:
+    radial-gradient(rgba(120, 94, 97, 0.045) 1px, transparent 1px),
+    radial-gradient(rgba(120, 94, 97, 0.03) 1px, transparent 1px);
+  background-size: 22px 22px, 37px 37px;
+  background-position: 0 0, 11px 17px;
 }
 
 * {
@@ -37,13 +57,82 @@ img {
 
 ::selection {
   background: rgba(255, 202, 212, 0.9);
-  color: #785e61;
-}
-
-.font-display {
-  font-family: "Google Sans", "Product Sans", "Segoe UI", sans-serif;
+  color: #3f2f31;
 }
 
 .font-script {
   font-family: "Sacramento", cursive;
+}
+
+/* Bordas de papel rasgado para as faixas coloridas */
+.torn-top {
+  --torn: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40V22l40-6 38 9 44-12 41 8 37-10 46 11 39-7 42 6 45-13 38 10 44-5 40 9 43-12 41 7 39-9 46 12 40-8 44 6 38-11 42 9 45-7 39 10 41-12 44 8 40-6 43 11 38-9 45 7 39-10 41 8 44-6 40 9 V40Z'/%3E%3C/svg%3E");
+  -webkit-mask: var(--torn) top / 100% 28px no-repeat, linear-gradient(#000 0 0) 0 27px / 100% calc(100% - 27px) no-repeat;
+  mask: var(--torn) top / 100% 28px no-repeat, linear-gradient(#000 0 0) 0 27px / 100% calc(100% - 27px) no-repeat;
+}
+
+.torn-y {
+  --torn-t: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40V22l40-6 38 9 44-12 41 8 37-10 46 11 39-7 42 6 45-13 38 10 44-5 40 9 43-12 41 7 39-9 46 12 40-8 44 6 38-11 42 9 45-7 39 10 41-12 44 8 40-6 43 11 38-9 45 7 39-10 41 8 44-6 40 9 V40Z'/%3E%3C/svg%3E");
+  --torn-b: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0V18l42 7 40-9 45 10 38-6 44 12 41-9 39 6 46-11 40 8 43-7 38 12 44-9 41 6 45-10 39 9 42-7 40 11 46-8 38 7 44-12 41 9 39-6 45 10 40-7 43 9 38-11 46 8 41-6 39 10 44-9 40 7 V0Z'/%3E%3C/svg%3E");
+  -webkit-mask:
+    var(--torn-t) top / 100% 28px no-repeat,
+    var(--torn-b) bottom / 100% 28px no-repeat,
+    linear-gradient(#000 0 0) 0 27px / 100% calc(100% - 54px) no-repeat;
+  mask:
+    var(--torn-t) top / 100% 28px no-repeat,
+    var(--torn-b) bottom / 100% 28px no-repeat,
+    linear-gradient(#000 0 0) 0 27px / 100% calc(100% - 54px) no-repeat;
+}
+
+/* Fita adesiva */
+.tape {
+  position: absolute;
+  height: 1.6rem;
+  width: 5.5rem;
+  background: rgba(243, 201, 105, 0.55);
+  box-shadow: 0 1px 2px rgba(63, 47, 49, 0.08);
+  clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 2% 96%, 0 48%);
+}
+
+.tape-pink {
+  background: rgba(255, 202, 212, 0.75);
+}
+
+.tape-sage {
+  background: rgba(181, 205, 170, 0.7);
+}
+
+/* Post-it */
+.sticky-note {
+  box-shadow:
+    0 1px 1px rgba(63, 47, 49, 0.06),
+    0 12px 22px -10px rgba(63, 47, 49, 0.35);
+}
+
+/* Moldura polaroid */
+.polaroid {
+  background: #fffdf9;
+  padding: 0.7rem 0.7rem 2.4rem;
+  box-shadow:
+    0 2px 4px rgba(63, 47, 49, 0.06),
+    0 24px 45px -18px rgba(63, 47, 49, 0.4);
+}
+
+/* Borda de cartão levemente “desenhada à mão” */
+.hand-card {
+  border: 1.5px solid rgba(63, 47, 49, 0.12);
+  border-radius: 22px 18px 24px 16px / 16px 24px 18px 22px;
+}
+
+.blob {
+  border-radius: 58% 42% 55% 45% / 48% 56% 44% 52%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wiggle-hover {
+    transition: transform 0.35s ease;
+  }
+  .wiggle-hover:hover {
+    transform: rotate(0deg) translateY(-6px) !important;
+  }
 }
